@@ -1,3 +1,4 @@
+from math import fabs
 import unittest
 import os
 from file_context import file_context
@@ -5,40 +6,58 @@ from file_context import file_context
 
 class test_file_context(unittest.TestCase):
 
+    # Integration Test
     def test_Add_ToNewFile_ItShouldOnlyOneText(self):
-        filename = 'c:/1.pytest'
-        text = "Hello!"
-        os.remove(filename)
-        fc = file_context(filename)
-        fc.add(text)
+        # Arrange
+        file_name = 'c:/1.pytest'
+        line_one = "Hello!"
+        os.remove(file_name)
+        f_c = file_context(file_name)
 
-        file = open(filename, "r")
-        for line in file:
-            self.assertEqual(f"{text}\n", line)
-        file.close()
+        # Action
+        f_c.add(line_one)
 
+        # Assert
+        self.assertTrue(self.file_lines_verify(
+            file_name, [line_one]))
+
+    # Integration Test
     def test_Add_ToExistingFile_ItShouldAppend(self):
-        filename = 'c:/1.pytest'
+        # Arrange
+        file_name = 'c:/1.pytest'
         line_one = "Hello!"
         line_two = "World."
+        os.remove(file_name)
+        fc = file_context(file_name)
 
-        os.remove(filename)
-        fc = file_context(filename)
+        # Action
         fc.add(line_one)
         fc.add(line_two)
 
-        file = open(filename, "r")
-        count = 1
+        # Assert
+        self.assertTrue(self.file_lines_verify(
+            file_name, [line_one, line_two]))
+
+    # Helper Method
+    def file_lines_verify(self, file_name, lines):
+        index = 0
+
+        file = open(file_name, "r")
+
         for line in file:
-            if count == 1:
-                self.assertEqual(f"{line_one}\n", line)
-            if count == 2:
-                self.assertEqual(f"{line_two}\n", line)
-            if count == 3:
-                self.assertTrue(False)
-            count = count + 1
+            if index >= len(lines):
+                return False
+
+            if line != f"{lines[index]}\n":
+                return False
+
+            index = index + 1
+
         file.close()
 
+        return True
 
+
+# this 2 lines, will help to RUN this file as usual but "unit testing" process take control of it!
 if __name__ == "__main__":
     unittest.main()
