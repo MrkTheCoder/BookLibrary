@@ -7,7 +7,7 @@ from file_context import file_context
 class test_file_context(unittest.TestCase):
 
     # Integration Test
-    def test_Add_ToNewFile_ItShouldOnlyOneText(self):
+    def test_Add_Oneline_ToNewFile_ShouldHaveOneline(self):
         # Arrange
         file_name = 'c:/1.pytest'
         line_one = "Hello!"
@@ -22,7 +22,7 @@ class test_file_context(unittest.TestCase):
             file_name, [line_one]))
 
     # Integration Test
-    def test_Add_ToExistingFile_ItShouldAppend(self):
+    def test_Add_OneLine_ToExistingFileWithOneLine_ShouldAppend(self):
         # Arrange
         file_name = 'c:/1.pytest'
         line_one = "Hello!"
