@@ -1,4 +1,4 @@
-class file_context:
+class TextFileDbContext:
     def __init__(self, file_path):
         self.file_path = file_path
 

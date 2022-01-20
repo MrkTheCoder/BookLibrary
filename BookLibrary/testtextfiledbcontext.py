@@ -1,10 +1,10 @@
 from math import fabs
 import unittest
 import os
-from file_context import file_context
+from .textfiledbcontext import TextFileDbContext
 
 
-class test_file_context(unittest.TestCase):
+class TextFileDbContextTests(unittest.TestCase):
 
     # Integration Test
     def test_Add_Oneline_ToNewFile_ShouldHaveOneline(self):
@@ -12,7 +12,7 @@ class test_file_context(unittest.TestCase):
         file_name = 'c:/1.pytest'
         line_one = "Hello!"
         os.remove(file_name)
-        f_c = file_context(file_name)
+        f_c = TextFileDbContext(file_name)
 
         # Action
         f_c.add(line_one)
@@ -28,7 +28,7 @@ class test_file_context(unittest.TestCase):
         line_one = "Hello!"
         line_two = "World."
         os.remove(file_name)
-        fc = file_context(file_name)
+        fc = TextFileDbContext(file_name)
 
         # Action
         fc.add(line_one)
