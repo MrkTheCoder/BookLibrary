@@ -1,4 +1,4 @@
-from .repositorybase import RepositoryBase
+from repository_base import RepositoryBase
 
 
 class UserRepository(RepositoryBase):

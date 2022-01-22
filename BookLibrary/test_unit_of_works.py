@@ -1,7 +1,7 @@
 import unittest
-from .book import Book
-from .user import User
-from .unitofworks import UnitOfWorks
+from unit_of_works import UnitOfWorks
+from book import Book
+from user import User
 
 
 class UnitOfWorksTests(unittest.TestCase):
@@ -17,23 +17,23 @@ class UnitOfWorksTests(unittest.TestCase):
     # integration Test
     def test_Add_BookEntity_ShouldEntityAddedToDb(self):
         # Assign
-        book = Book("Abc")
+        new_book = Book("Abc")
 
         # Action
-        self.database.books.add(book)
+        self.database.books.add(new_book)
 
         # Assert
         self.assertTrue(self.file_lines_verify(
-            self.database.books_file_path, [book.title]))
+            self.database.books_file_path, [new_book.title]))
 
     # integration Test
     def test_AddUserEntity_ShouldEntityAddedToDb(self):
-        user = User("Abcd", "Efgh")
+        new_user = User("Abcd", "Efgh")
 
-        self.database.users.add(user)
+        self.database.users.add(new_user)
 
         self.assertTrue(self.file_lines_verify(
-            self.database.users_file_path, [user]))
+            self.database.users_file_path, [new_user]))
 
     # Helper Method
     def file_lines_verify(self, file_name, lines):

@@ -1,6 +1,6 @@
-from .bookrepository import BookRepository
-from .userrepository import UserRepository
-from .textfiledbcontext import TextFileDbContext
+from user_repository import UserRepository
+from book_repository import BookRepository
+from text_file_context import TextFileContext
 import os
 
 
@@ -15,27 +15,27 @@ class UnitOfWorks:
     def books(self):
         if self.__books == None:
             self.books = BookRepository(
-                TextFileDbContext(self.__books_file_path))
+                TextFileContext(self.__books_file_path))
         return self.__books
 
     @books.setter
     def books(self, value):
         self.__books_file_path = value
         self.__books = BookRepository(
-            TextFileDbContext(value))
+            TextFileContext(value))
 
     @property
     def users(self):
         if self.__users == None:
             self.users = UserRepository(
-                TextFileDbContext(self.__users_file_path))
+                TextFileContext(self.__users_file_path))
         return self.__users
 
     @users.setter
     def users(self, value):
         self.__users_file_path = value
         self.__users = UserRepository(
-            TextFileDbContext(value))
+            TextFileContext(value))
 
     def remove_database_files(self):
         if os.path.exists(self.__users_file_path):
